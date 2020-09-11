@@ -4,10 +4,10 @@
 def find_median_sorted_arrays(nums1, nums2)
     nums = (nums1 + nums2).sort
     
-    while nums.length > 2
-        nums.pop
-        nums.shift
+    if nums.length % 2 == 1
+        return nums[(nums.length / 2)]
+    else
+        middle = nums.length / 2
+        return (nums[middle].to_f + nums[middle - 1].to_f) / 2
     end
-    
-    return nums.length > 1 ? (nums[0].to_f + nums[1].to_f) / 2 : nums[0]
 end
