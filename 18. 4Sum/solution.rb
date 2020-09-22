@@ -12,7 +12,7 @@ def n_sum(nums, target, n)
     result = []
     nums.each_with_index do |num, index|
         if index == 0 || nums[index - 1] != num
-            n_sum(nums[index + 1..-1], target - num, n - 1).each do |res|
+            n_sum(nums[index + 1..nums.length - 1], target - num, n - 1).each do |res|
                 result.push([num, res].flatten)
             end
         end
@@ -21,12 +21,15 @@ def n_sum(nums, target, n)
 end
 
 def two_sum(nums, target)
-    hash = Hash.new
+    result = []
+    set = Set[]
     nums.each_with_index do |num, index|
-        if hash[target - num]
-            return [hash[target - num], index]
-        else
-            hash[num] = index
+        if result.length == 0 || result[-1][1] != num
+            if set.include?(target - num)
+                result.push([target - num, num])
+            end
         end
+        set.add(num)
     end
+    return result
 end
